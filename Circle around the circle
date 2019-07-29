@@ -1,0 +1,37 @@
+#include <QApplication>
+#include <QGraphicsScene>
+#include <QGraphicsItem>
+#include <QGraphicsView>
+#include <QRectF>
+#include <QColor>
+#include <QtMath>
+
+int main(int argc, char *argv[])
+{
+    QApplication a(argc,argv);
+    QGraphicsScene * scene = new QGraphicsScene();
+
+    int numberOfCircle = 8;
+    int Circle_Width = 100;
+    int Circle_Height = 100;
+
+    qreal xo,yo, slice,radius,angle;
+    radius = 200;
+    slice = 2 * M_PI / numberOfCircle;
+    angle = 0;
+    xo = 0;
+    yo = 0;
+
+    for(int i = 0; i < 100; i++ )
+    {
+        angle = i * slice;
+        xo = qCos(angle)  * radius;
+        yo = qSin(angle)  * radius;
+        QGraphicsEllipseItem *circle = new QGraphicsEllipseItem(xo,yo,Circle_Width,Circle_Height);
+        circle->setBrush(Qt::red);
+        scene->addItem(circle);
+    }
+    QGraphicsView * view = new QGraphicsView(scene);
+    view->show();
+    return a.exec();
+}
