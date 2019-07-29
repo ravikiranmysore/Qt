@@ -1,0 +1,42 @@
+#include <QApplication>
+#include <QGraphicsScene>
+#include <QGraphicsItem>
+#include <QGraphicsView>
+#include <QRectF>
+#include <QColor>
+#include <QtMath>
+
+int main(int argc, char *argv[])
+{
+    QApplication a(argc,argv);
+    QGraphicsScene * scene = new QGraphicsScene();
+
+    int size_horizontal  = 400;
+    int size_verticle = 400;
+    int cude_width = 100;
+    int cube_height =100;
+    int shift = 100;
+
+    int x = 0;
+    while(x < size_horizontal)
+    {
+        QGraphicsRectItem *rect = new QGraphicsRectItem();
+        rect->setPen(QPen(Qt::blue));
+        rect->setBrush(QColor(Qt::red));
+        rect->setRect(x+shift,0,cude_width,cube_height);
+        scene->addItem(rect);
+        x+=cude_width;
+    }
+
+    for(int y = 0; y < size_verticle; y+=cube_height)
+    {
+        QGraphicsRectItem *rect = new QGraphicsRectItem();
+        rect->setPen(QPen(Qt::red));
+        rect->setBrush(QColor(Qt::blue));
+        rect->setRect(0,y+shift,cude_width, cube_height);
+        scene->addItem(rect);
+    }
+    QGraphicsView * view = new QGraphicsView(scene);
+    view->show();
+    return a.exec();
+}
