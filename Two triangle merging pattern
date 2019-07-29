@@ -1,0 +1,36 @@
+#include <QApplication>
+#include <QGraphicsScene>
+#include <QGraphicsItem>
+#include <QGraphicsView>
+#include <QRectF>
+#include <QColor>
+#include <QtMath>
+
+int main(int argc, char *argv[])
+{
+    QApplication a(argc,argv);
+    QGraphicsScene * scene = new QGraphicsScene();
+    
+    
+    for(int i = 0; i <= 500; i+=20)
+    {
+        for(int j = 0; j <=i; j+=20 )
+        {
+            QGraphicsRectItem *rect = new QGraphicsRectItem();
+            rect->setPen(QPen(Qt::blue));
+            rect->setBrush(QColor(Qt::red));
+            rect->setRect(j*2,i*2,10,10);
+            scene->addItem(rect);
+            
+            QGraphicsRectItem *rect1 = new QGraphicsRectItem();
+            rect1->setPen(QPen(Qt::red));
+            rect1->setBrush(QColor(Qt::green));
+            rect1->setRect(i*2,j*2,10,10);
+            scene->addItem(rect1);
+        }
+    }
+    
+    QGraphicsView * view = new QGraphicsView(scene);
+    view->show();
+    return a.exec();
+}
